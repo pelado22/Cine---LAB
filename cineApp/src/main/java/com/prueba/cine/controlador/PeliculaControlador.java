@@ -9,9 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.prueba.cine.modelo.Pelicula;
-import com.prueba.cine.servicio.PeliculaServicio;
 import com.prueba.cine.modelo.Genero;
+import com.prueba.cine.modelo.Actor;
+import com.prueba.cine.modelo.Director;
+import com.prueba.cine.servicio.PeliculaServicio;
 import com.prueba.cine.servicio.GeneroServicio;
+import com.prueba.cine.repositorio.ActorRepositorio;
+import com.prueba.cine.repositorio.DirectorRepositorio;
 
 @Controller
 @RequestMapping("/peliculas")
@@ -22,8 +26,13 @@ public class PeliculaControlador {
 
     @Autowired
     private GeneroServicio generoServ;
-    
 
+    // Inyectamos los nuevos repositorios para enviarlos a la vista
+    @Autowired
+    private ActorRepositorio actorRep;
+
+    @Autowired
+    private DirectorRepositorio directorRep;
 
     @GetMapping
     public String peliculas(Model model) {
@@ -35,9 +44,11 @@ public class PeliculaControlador {
     @GetMapping("/new")
     public String showNewForm(Model model) {
         Pelicula pelicula = new Pelicula();
-        List<Genero> generos = generoServ.findAll();
         model.addAttribute("pelicula", pelicula);
-        model.addAttribute("generos", generos);
+        // Enviamos las listas para los menús desplegables del HTML
+        model.addAttribute("generos", generoServ.findAll());
+        model.addAttribute("actores", actorRep.findAll());
+        model.addAttribute("directores", directorRep.findAll());
         return "aggPelicula";
     }
 
@@ -51,35 +62,49 @@ public class PeliculaControlador {
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         Optional<Pelicula> peliculaOptional = peliculaServ.findById(id);
         if (peliculaOptional.isPresent()) {
-            Pelicula pelicula = peliculaOptional.get();
-            List<Genero> generos = generoServ.findAll();
-            model.addAttribute("pelicula", pelicula);
-            model.addAttribute("generos", generos);
+            model.addAttribute("pelicula", peliculaOptional.get());
+            // Enviamos las listas para los menús desplegables del HTML
+            model.addAttribute("generos", generoServ.findAll());
+            model.addAttribute("actores", actorRep.findAll());
+            model.addAttribute("directores", directorRep.findAll());
             return "editar";
         } else {
             return "redirect:/peliculas"; 
         }
     }
 
-@PostMapping("/editar/{id}")
-public String updatePelicula(@PathVariable("id") Long id, @ModelAttribute("pelicula") Pelicula peliculaActualizada) {
-    Optional<Pelicula> peliculaOptional = peliculaServ.findById(id);
-    if (peliculaOptional.isPresent()) {
-        Pelicula existingPelicula = peliculaOptional.get();
-        existingPelicula.setTitulo(peliculaActualizada.getTitulo());
-        existingPelicula.setProtagonista(peliculaActualizada.getProtagonista());
-        existingPelicula.setAño(peliculaActualizada.getAño());
+    @PostMapping("/editar/{id}")
+    public String updatePelicula(@PathVariable("id") Long id, @ModelAttribute("pelicula") Pelicula peliculaActualizada) {
+        Optional<Pelicula> peliculaOptional = peliculaServ.findById(id);
+        if (peliculaOptional.isPresent()) {
+            Pelicula existingPelicula = peliculaOptional.get();
+            
+            existingPelicula.setTitulo(peliculaActualizada.getTitulo());
+            existingPelicula.setAño(peliculaActualizada.getAño());
+            
+            // Ya no usamos setProtagonista()
+            
+            // Actualizar Género
+            if (peliculaActualizada.getGenero() != null && peliculaActualizada.getGenero().getId() != null) {
+                existingPelicula.setGenero(peliculaActualizada.getGenero());
+            }
 
-        // Si el objeto recibido tiene el ID de género, búscalo en el servicio
-        if (peliculaActualizada.getGenero() != null && peliculaActualizada.getGenero().getId() != null) {
-            Genero genero = generoServ.findById(peliculaActualizada.getGenero().getId()).orElse(null);
-            existingPelicula.setGenero(genero);
+            // Actualizar Director
+            if (peliculaActualizada.getDirector() != null && peliculaActualizada.getDirector().getId() != null) {
+                existingPelicula.setDirector(peliculaActualizada.getDirector());
+            }
+
+            // Actualizar Actores (Al ser una lista, se reemplaza completa)
+            if (peliculaActualizada.getActores() != null) {
+                existingPelicula.setActores(peliculaActualizada.getActores());
+            }
+            
+            peliculaServ.save(existingPelicula);
+            return "redirect:/peliculas";
+        } else {
+            return "redirect:/peliculas";
         }
-        peliculaServ.save(existingPelicula);
-        return "redirect:/peliculas";
     }
-    return "redirect:/peliculas";
-}
 
     @GetMapping("/delete/{id}")
     public String deletePelicula(@PathVariable("id") Long id) {

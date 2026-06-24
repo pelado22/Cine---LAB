@@ -19,9 +19,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Título</th>
-                                <th>Protagonista</th>
                                 <th>Año</th>
                                 <th>Género</th>
+                                <th>Director</th>
+                                <th>Actores</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -29,10 +30,19 @@
                             <tr th:each="pelicula : ${peliculas}">
                                 <td th:text="${pelicula.id}">1</td>
                                 <td th:text="${pelicula.titulo}">Título</td>
-                                <td th:text="${pelicula.protagonista}">Protagonista</td>
                                 <td th:text="${pelicula.año}">Año</td>
-                                <td th:if="${pelicula.genero != null}" th:text="${pelicula.genero.titulo}">Género</td>
-                                <td th:if="${pelicula.genero == null}">-</td> 
+                                <td th:text="${pelicula.genero != null ? pelicula.genero.titulo : '-'}">Género</td>
+                                
+                                <td th:text="${pelicula.director != null ? pelicula.director.nombre : '-'}">Director</td>
+                                
+                                <td>
+                                    <span th:each="actor, iterStat : ${pelicula.actores}">
+                                        <th:block th:text="${actor.nombre}"></th:block>
+                                        <th:block th:if="${!iterStat.last}">, </th:block>
+                                    </span>
+                                    <span th:if="${#lists.isEmpty(pelicula.actores)}">-</span>
+                                </td>
+                                
                                 <td>
                                     <a th:href="@{/peliculas/editar/{id}(id=${pelicula.id})}" class="btn btn-warning btn-sm">Editar película</a>
                                     <a th:href="@{/peliculas/delete/{id}(id=${pelicula.id})}" class="btn btn-danger btn-sm">Eliminar</a>
@@ -45,7 +55,6 @@
                     </div>
                 </div>
             </div>
-            <!-- fueracard-body -->
             <div class="mt-3 text-center">
                 <a href="http://localhost:8081/" class="btn btn-primary">Ir a la página principal</a>
             </div>

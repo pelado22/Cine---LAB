@@ -21,19 +21,28 @@
                             </div>
                             
                             <div class="form-group mb-3">
-                                <label for="protagonista">Protagonista</label>
-                                <input type="text" id="protagonista" th:field="*{protagonista}" class="form-control" placeholder="Ingrese el protagonista" required>
-                            </div>
-                            
-                            <div class="form-group mb-3">
                                 <label for="año">Año</label>
-                                <input type="number" id="año" th:field="*{año}" class="form-control" placeholder="Ingrese el año (1930-2024)" required min="1930" max="2024">
+                                <input type="number" id="año" th:field="*{año}" class="form-control" placeholder="Ingrese el año (1930-2026)" required min="1930" max="2026">
                             </div>
                             
                             <div class="form-group mb-3">
                                 <label for="genero">Género</label>
-                                <select id="genero" class="form-select" th:field="*{genero.id}">
+                                <select id="genero" class="form-select" th:field="*{genero}">
                                     <option th:each="gen : ${generos}" th:value="${gen.id}" th:text="${gen.titulo}"></option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="director">Director</label>
+                                <select id="director" class="form-select" th:field="*{director}" required>
+                                    <option th:each="d : ${directores}" th:value="${d.id}" th:text="${d.nombre}"></option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="actores">Actores (Mantén presionado Ctrl para elegir varios)</label>
+                                <select id="actores" class="form-select" th:field="*{actores}" multiple required>
+                                    <option th:each="a : ${actores}" th:value="${a.id}" th:text="${a.nombre}"></option>
                                 </select>
                             </div>
                             
