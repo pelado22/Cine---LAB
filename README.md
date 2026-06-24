@@ -25,7 +25,7 @@ A continuación, se detallan las herramientas elegidas para el desarrollo y el m
 * **MySQL (vía XAMPP)**
   * *¿Por qué?* Se optó por un motor de base de datos relacional robusto y estándar en la industria, ideal para manejar las relaciones entre entidades.
 * **CSS3 Custom (Minimalist UI)**
-  * *¿Por qué?* Se implementó un diseño modular mediante hojas de estilo propias para tener control total sobre la paleta de colores y las transiciones, logrando una presentación profesional de la vista de autenticación y el panel de control.
+  * *¿Por qué?* Se implementó un diseño modular mediante hojas de estilo propias para tener control total sobre la paleta de colores y las transiciones, logrando una presentación de la vista de autenticación y el panel de control.
 
 ---
 
