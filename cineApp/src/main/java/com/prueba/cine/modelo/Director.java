@@ -19,7 +19,7 @@ public class Director {
     @OneToMany(mappedBy = "director")
     private List<Pelicula> peliculas = new ArrayList<>();
 
-    // Constructores, Getters y Setters...
+    // Constructores, Getters y Setters
     public Director() {}
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

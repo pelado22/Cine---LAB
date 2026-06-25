@@ -23,7 +23,7 @@ public class UsuarioServicio implements UserDetailsService {
         Usuario usuario = usuarioRepositorio.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
-        // Aquí usamos el constructor extendido de User de Spring Security
+        // constructor extendido de User de Spring Security
         // El penúltimo parámetro es "accountNonLocked" (cuenta NO bloqueada)
         return new User(
                 usuario.getUsername(),
