@@ -1,0 +1,201 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+body {
+    background-color: #09090b;
+    color: #fafafa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-navbar {
+    background-color: #141416; /* Gris oscuro profundo */
+    border-bottom: 1px solid #232326; /* Línea de división sutil */
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand-modern {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    color: #fafafa;
+}
+
+.navbar-brand-modern span {
+    color: #e50914; /* Rojo cinematrografico */
+}
+
+.session-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-status {
+    font-size: 0.88rem;
+    color: #a1a1aa;
+    font-weight: 500;
+}
+
+.user-name {
+    color: #fafafa;
+    font-weight: 600;
+    background-color: #232326;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid #2d2d30;
+}
+
+/* Botón de cerrar sesión minimalista */
+.btn-logout-modern {
+    background: transparent;
+    color: #a1a1aa;
+    border: 1px solid #232326;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout-modern:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* --- CONTENEDOR Y HERO SECTION --- */
+.hero-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.hero-card {
+    background-color: #141416;
+    border: 1px solid #232326;
+    border-radius: 16px;
+    padding: 3.5rem 3rem;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+    animation: fadeInHero 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInHero {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+    color: #fafafa;
+}
+
+.hero-text {
+    font-size: 1.05rem;
+    color: #a1a1aa;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* --- BOTONES DE CONTROL DE FLUJO --- */
+.button-group-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+/* Botón Primario: Blanco Sólido */
+.btn-primary-modern {
+    background-color: #fafafa;
+    color: #09090b;
+    border: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+.btn-primary-modern:hover {
+    background-color: #e4e4e7;
+    transform: translateY(-1px);
+}
+
+/* Botón Secundario: Oscuro con Borde */
+.btn-secondary-modern {
+    background-color: transparent;
+    color: #fafafa;
+    border: 1px solid #232326;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary-modern:hover {
+    background-color: #18181b;
+    border-color: #3f3f46;
+    transform: translateY(-1px);
+}
+
+.btn-primary-modern:active, .btn-secondary-modern:active {
+    transform: translateY(0);
+}
+
+
+.custom-footer {
+    background-color: #09090b; /* Se fusiona con el fondo general */
+    border-top: 1px solid #1f1f23; 
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-top: auto; /* Fuerza al footer a ubicarse al fondo del viewport */
+}
+
+.custom-footer p {
+    margin: 0;
+    font-size: 0.825rem;
+    color: #52525b; /* Gris apagado para mantener el perfil bajo */
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.footer-link {
+    color: #a1a1aa; /* Color gris claro para destacar el enlace de forma fina */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease; /* Transición suave de color al pasar el mouse */
+}
+
+.footer-link:hover {
+    color: #e50914; /* Cambia al rojo corporativo de Cinemax en hover */
+}

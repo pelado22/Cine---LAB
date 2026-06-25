@@ -16,17 +16,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll() // Permitir diseño sin login
-                .anyRequest().authenticated() // Cualquier otra ruta pedirá iniciar sesión
+                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll() // permitir diseño sin login
+                .anyRequest().authenticated() // cualquier otra ruta pide iniciar sesion
             )
             .formLogin(login -> login
-                .loginPage("/login") // Indicamos nuestra pantalla de login personalizada
-                .defaultSuccessUrl("/", true) // A dónde ir al ingresar con éxito (página principal)
+                .loginPage("/login") 
+                .defaultSuccessUrl("/", true) // a donde ir al ingresar 
                 .permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout") // A dónde ir al cerrar sesión
+                .logoutSuccessUrl("/login?logout") // al cerrar sesión
                 .permitAll()
             );
         return http.build();
